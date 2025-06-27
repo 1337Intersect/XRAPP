@@ -1,0 +1,112 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <meta charset="UTF-8"> 
+    <style> 
+        @page { size: A4; margin: 10mm; } 
+        body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; } 
+        .header { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; } 
+        .company-info { flex: 1; padding: 10px; background-color: #f0f0f0; font-size: 10px; } 
+        .form-row { display: flex; margin-bottom: 5px; border: 1px solid #ccc; min-height: 25px; align-items: center; } 
+        .form-cell { border-right: 1px solid #ccc; padding: 5px; flex: 1; } 
+        .form-cell:last-child { border-right: none; } 
+        .checkbox { display: inline-block; width: 15px; height: 15px; border: 2px solid #333; margin-right: 5px; } 
+        .checkbox.checked::after { content: '✓'; position: absolute; left: 2px; top: -2px; font-size: 12px; font-weight: bold; } 
+        .total-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #ddd; } 
+        .final { font-weight: bold; font-size: 14px; border-bottom: 2px solid #333; } 
+        .work-section { min-height: 80px; } 
+    </style> 
+</head> 
+<body> 
+    <div class="header"> 
+        <div class="company-info"> 
+            <strong>Sede amministrativa ed operativa</strong><br> 
+            Via G.Pascoli, 42/M1 30020<br> 
+            Quarto d'Altino (VE) ITALY<br> 
+            T. +39 0422 780605<br> 
+            F. +39 0422 828811<br> 
+            P.I. E C.F. 03245210277 
+        </div> 
+        <div style="text-align: center; padding: 20px;"> 
+            <h2 style="color: #2563eb; margin: 0;">RAPPORTO INTERVENTO</h2> 
+        </div> 
+        <div class="company-info"> 
+            <strong>Sede operativa</strong><br> 
+            Via Isonzo 8/B<br> 
+            22078 Turate (CO) ITALY<br> 
+            +39 02 495042<br> 
+            F. +39 02 49504207<br> 
+            P.I. E C.F. 04330640964 
+        </div> 
+    </div> 
+    <div class="form-row"> 
+        <div class="form-cell" style="flex: 0 0 100px;"><strong>DATA:</strong></div> 
+        <div class="form-cell" style="flex: 0 0 150px;">{{date}}</div> 
+        <div class="form-cell" style="flex: 1;"></div> 
+        <div class="form-cell" style="flex: 0 0 100px;"><strong>TECNICO:</strong></div> 
+        <div class="form-cell" style="flex: 0 0 200px;">{{technician}}</div> 
+    </div> 
+    <div class="form-row"> 
+        <div class="form-cell" style="flex: 0 0 150px;"><strong>INTERVENTO N:</strong></div> 
+        <div class="form-cell" style="flex: 1;">{{interventionNumber}}</div> 
+    </div> 
+    <div class="form-row"> 
+        <div class="form-cell"><span class="checkbox"></span> RIPARAZIONE/MANUTENZIONE</div> 
+        <div class="form-cell"><span class="checkbox"></span> INSTALLAZIONE</div> 
+        <div class="form-cell"><span class="checkbox"></span> CORSO</div> 
+        <div class="form-cell"><span class="checkbox"></span> DEMO</div> 
+        <div class="form-cell"><span class="checkbox"></span> ALTRO</div> 
+    </div> 
+    <div class="form-row"> 
+        <div class="form-cell" style="flex: 0 0 100px;"><strong>CLIENTE:</strong></div> 
+        <div class="form-cell" style="flex: 1;">{{clientName}}</div> 
+        <div class="form-cell" style="flex: 0 0 80px;"><strong>CITTA':</strong></div> 
+        <div class="form-cell" style="flex: 0 0 150px;">{{clientCity}}</div> 
+    </div> 
+    <div class="form-row"> 
+        <div class="form-cell" style="flex: 0 0 100px;"><strong>INDIRIZZO:</strong></div> 
+        <div class="form-cell" style="flex: 1;">{{clientAddress}}</div> 
+        <div class="form-cell" style="flex: 0 0 60px;"><strong>TEL:</strong></div> 
+        <div class="form-cell" style="flex: 0 0 120px;">{{clientPhone}}</div> 
+    </div> 
+    <div class="form-row"> 
+        <div class="form-cell" style="flex: 0 0 100px;"><strong>PRODOTTO:</strong></div> 
+        <div class="form-cell" style="flex: 0 0 100px;">{{productBrand}}</div> 
+        <div class="form-cell" style="flex: 0 0 100px;"><strong>MODELLO:</strong></div> 
+        <div class="form-cell" style="flex: 0 0 150px;">{{productModel}}</div> 
+        <div class="form-cell" style="flex: 0 0 60px;"><strong>S/N:</strong></div> 
+        <div class="form-cell" style="flex: 1;">{{productSerial}}</div> 
+    </div> 
+    <div class="form-row" style="min-height: 40px;"> 
+        <div class="form-cell" style="flex: 0 0 150px;"><strong>DIFETTO SEGNALATO:</strong></div> 
+        <div class="form-cell" style="flex: 1;">{{problemReported}}</div> 
+    </div> 
+    <div class="form-row" style="min-height: 40px;"> 
+        <div class="form-cell" style="flex: 0 0 150px;"><strong>DIFETTO RISCONTRATO:</strong></div> 
+        <div class="form-cell" style="flex: 1;">{{problemFound}}</div> 
+    </div> 
+    <div class="form-row work-section"> 
+        <div class="form-cell" style="flex: 0 0 200px;"><strong>DESCRIZIONE INTERVENTO ESEGUITO:</strong></div> 
+        <div class="form-cell" style="flex: 1; white-space: pre-wrap; padding: 10px;">{{workDescription}}</div> 
+    </div> 
+    <div style="margin: 30px 0;"> 
+        <div class="total-row final"> 
+            <span><strong>TOTALE (IVA 22</strong></span> 
+            <span><strong>€{{totalWithVat}}</strong></span> 
+        </div> 
+    </div> 
+    <div class="form-row" style="min-height: 80px;"> 
+        <div class="form-cell" style="flex: 1;"> 
+            <strong>NOME-FIRMA TECNICO:</strong><br><br> 
+            <div style="text-align: center; margin-top: 40px;">{{technician}}</div> 
+        </div> 
+        <div class="form-cell" style="flex: 1;"> 
+            <strong>TIMBRO E FIRMA CLIENTE:</strong><br> 
+            <div style="height: 60px; border: 1px dashed #ccc; margin-top: 10px;"></div> 
+        </div> 
+    </div> 
+    <div style="text-align: center; margin-top: 20px; font-size: 10px; border-top: 1px solid #ccc; padding-top: 10px;"> 
+        Via G. Pascoli, 42/M1 30020 Quarto D'Altino (VE) ITALY T. +39 0422 780605 F. +39 0422 828811 
+    </div> 
+</body> 
+</html> 
