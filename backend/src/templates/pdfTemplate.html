@@ -1,112 +1,614 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <meta charset="UTF-8"> 
-    <style> 
-        @page { size: A4; margin: 10mm; } 
-        body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 0; } 
-        .header { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #333; padding-bottom: 10px; } 
-        .company-info { flex: 1; padding: 10px; background-color: #f0f0f0; font-size: 10px; } 
-        .form-row { display: flex; margin-bottom: 5px; border: 1px solid #ccc; min-height: 25px; align-items: center; } 
-        .form-cell { border-right: 1px solid #ccc; padding: 5px; flex: 1; } 
-        .form-cell:last-child { border-right: none; } 
-        .checkbox { display: inline-block; width: 15px; height: 15px; border: 2px solid #333; margin-right: 5px; } 
-        .checkbox.checked::after { content: '✓'; position: absolute; left: 2px; top: -2px; font-size: 12px; font-weight: bold; } 
-        .total-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #ddd; } 
-        .final { font-weight: bold; font-size: 14px; border-bottom: 2px solid #333; } 
-        .work-section { min-height: 80px; } 
-    </style> 
-</head> 
-<body> 
-    <div class="header"> 
-        <div class="company-info"> 
-            <strong>Sede amministrativa ed operativa</strong><br> 
-            Via G.Pascoli, 42/M1 30020<br> 
-            Quarto d'Altino (VE) ITALY<br> 
-            T. +39 0422 780605<br> 
-            F. +39 0422 828811<br> 
-            P.I. E C.F. 03245210277 
-        </div> 
-        <div style="text-align: center; padding: 20px;"> 
-            <h2 style="color: #2563eb; margin: 0;">RAPPORTO INTERVENTO</h2> 
-        </div> 
-        <div class="company-info"> 
-            <strong>Sede operativa</strong><br> 
-            Via Isonzo 8/B<br> 
-            22078 Turate (CO) ITALY<br> 
-            +39 02 495042<br> 
-            F. +39 02 49504207<br> 
-            P.I. E C.F. 04330640964 
-        </div> 
-    </div> 
-    <div class="form-row"> 
-        <div class="form-cell" style="flex: 0 0 100px;"><strong>DATA:</strong></div> 
-        <div class="form-cell" style="flex: 0 0 150px;">{{date}}</div> 
-        <div class="form-cell" style="flex: 1;"></div> 
-        <div class="form-cell" style="flex: 0 0 100px;"><strong>TECNICO:</strong></div> 
-        <div class="form-cell" style="flex: 0 0 200px;">{{technician}}</div> 
-    </div> 
-    <div class="form-row"> 
-        <div class="form-cell" style="flex: 0 0 150px;"><strong>INTERVENTO N:</strong></div> 
-        <div class="form-cell" style="flex: 1;">{{interventionNumber}}</div> 
-    </div> 
-    <div class="form-row"> 
-        <div class="form-cell"><span class="checkbox"></span> RIPARAZIONE/MANUTENZIONE</div> 
-        <div class="form-cell"><span class="checkbox"></span> INSTALLAZIONE</div> 
-        <div class="form-cell"><span class="checkbox"></span> CORSO</div> 
-        <div class="form-cell"><span class="checkbox"></span> DEMO</div> 
-        <div class="form-cell"><span class="checkbox"></span> ALTRO</div> 
-    </div> 
-    <div class="form-row"> 
-        <div class="form-cell" style="flex: 0 0 100px;"><strong>CLIENTE:</strong></div> 
-        <div class="form-cell" style="flex: 1;">{{clientName}}</div> 
-        <div class="form-cell" style="flex: 0 0 80px;"><strong>CITTA':</strong></div> 
-        <div class="form-cell" style="flex: 0 0 150px;">{{clientCity}}</div> 
-    </div> 
-    <div class="form-row"> 
-        <div class="form-cell" style="flex: 0 0 100px;"><strong>INDIRIZZO:</strong></div> 
-        <div class="form-cell" style="flex: 1;">{{clientAddress}}</div> 
-        <div class="form-cell" style="flex: 0 0 60px;"><strong>TEL:</strong></div> 
-        <div class="form-cell" style="flex: 0 0 120px;">{{clientPhone}}</div> 
-    </div> 
-    <div class="form-row"> 
-        <div class="form-cell" style="flex: 0 0 100px;"><strong>PRODOTTO:</strong></div> 
-        <div class="form-cell" style="flex: 0 0 100px;">{{productBrand}}</div> 
-        <div class="form-cell" style="flex: 0 0 100px;"><strong>MODELLO:</strong></div> 
-        <div class="form-cell" style="flex: 0 0 150px;">{{productModel}}</div> 
-        <div class="form-cell" style="flex: 0 0 60px;"><strong>S/N:</strong></div> 
-        <div class="form-cell" style="flex: 1;">{{productSerial}}</div> 
-    </div> 
-    <div class="form-row" style="min-height: 40px;"> 
-        <div class="form-cell" style="flex: 0 0 150px;"><strong>DIFETTO SEGNALATO:</strong></div> 
-        <div class="form-cell" style="flex: 1;">{{problemReported}}</div> 
-    </div> 
-    <div class="form-row" style="min-height: 40px;"> 
-        <div class="form-cell" style="flex: 0 0 150px;"><strong>DIFETTO RISCONTRATO:</strong></div> 
-        <div class="form-cell" style="flex: 1;">{{problemFound}}</div> 
-    </div> 
-    <div class="form-row work-section"> 
-        <div class="form-cell" style="flex: 0 0 200px;"><strong>DESCRIZIONE INTERVENTO ESEGUITO:</strong></div> 
-        <div class="form-cell" style="flex: 1; white-space: pre-wrap; padding: 10px;">{{workDescription}}</div> 
-    </div> 
-    <div style="margin: 30px 0;"> 
-        <div class="total-row final"> 
-            <span><strong>TOTALE (IVA 22</strong></span> 
-            <span><strong>€{{totalWithVat}}</strong></span> 
-        </div> 
-    </div> 
-    <div class="form-row" style="min-height: 80px;"> 
-        <div class="form-cell" style="flex: 1;"> 
-            <strong>NOME-FIRMA TECNICO:</strong><br><br> 
-            <div style="text-align: center; margin-top: 40px;">{{technician}}</div> 
-        </div> 
-        <div class="form-cell" style="flex: 1;"> 
-            <strong>TIMBRO E FIRMA CLIENTE:</strong><br> 
-            <div style="height: 60px; border: 1px dashed #ccc; margin-top: 10px;"></div> 
-        </div> 
-    </div> 
-    <div style="text-align: center; margin-top: 20px; font-size: 10px; border-top: 1px solid #ccc; padding-top: 10px;"> 
-        Via G. Pascoli, 42/M1 30020 Quarto D'Altino (VE) ITALY T. +39 0422 780605 F. +39 0422 828811 
-    </div> 
-</body> 
-</html> 
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Rapporto Intervento</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 12mm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            line-height: 1.1;
+            color: #000;
+            background: white;
+        }
+        
+        /* === HEADER === */
+        .document-header {
+            width: 100%;
+            border: 2px solid #000;
+            display: flex;
+            height: 85px;
+            margin-bottom: 2px;
+        }
+        
+        .header-column {
+            flex: 1;
+            border-right: 2px solid #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 6px 8px;
+            text-align: center;
+        }
+        
+        .header-column:last-child {
+            border-right: none;
+        }
+        
+        .header-center {
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .company-logo {
+            max-height: 28px;
+            max-width: 120px;
+            margin-bottom: 3px;
+        }
+        
+        .company-details {
+            font-size: 7px;
+            line-height: 1.1;
+        }
+        
+        .main-title {
+            color: #0066cc;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        /* === FORM DATA === */
+        .form-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2px;
+        }
+        
+        .grid-row {
+            border: 1px solid #000;
+            border-bottom: none;
+            height: 20px;
+        }
+        
+        .grid-row:last-child {
+            border-bottom: 1px solid #000;
+        }
+        
+        .grid-cell {
+            border-right: 1px solid #000;
+            padding: 2px 4px;
+            font-size: 8px;
+            vertical-align: middle;
+        }
+        
+        .grid-cell:last-child {
+            border-right: none;
+        }
+        
+        .cell-label {
+            font-weight: bold;
+        }
+        
+        .checkbox-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+        
+        .form-checkbox {
+            width: 9px;
+            height: 9px;
+            border: 1px solid #000;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        .form-checkbox.checked::after {
+            content: "✓";
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 7px;
+            font-weight: bold;
+        }
+        
+        /* === WORK DESCRIPTION === */
+        .work-description-section {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin-bottom: 2px;
+        }
+        
+        .work-description-row {
+            height: 50px;
+        }
+        
+        .work-label-cell {
+            border-right: 1px solid #000;
+            padding: 4px 6px;
+            font-size: 8px;
+            font-weight: bold;
+            width: 140px;
+            vertical-align: top;
+        }
+        
+        .work-content-cell {
+            border-right: 1px solid #000;
+            padding: 4px 6px;
+            font-size: 8px;
+            vertical-align: top;
+        }
+        
+        .copies-cell {
+            padding: 4px 6px;
+            font-size: 8px;
+            font-weight: bold;
+            width: 90px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        /* === PARTS TABLE === */
+        .parts-inventory {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2px;
+        }
+        
+        .parts-header {
+            background: #fff;
+            border: 1px solid #000;
+            padding: 3px 4px;
+            font-size: 8px;
+            font-weight: bold;
+            text-align: center;
+            height: 18px;
+        }
+        
+        .parts-data {
+            border: 1px solid #000;
+            border-top: none;
+            padding: 2px 4px;
+            font-size: 8px;
+            text-align: center;
+            height: 16px;
+        }
+        
+        .parts-data.description {
+            text-align: left;
+        }
+        
+        /* === COSTS SECTION === */
+        .costs-layout {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin-bottom: 2px;
+        }
+        
+        .costs-main-row {
+            height: auto;
+        }
+        
+        .costs-left-column {
+            border-right: 1px solid #000;
+            width: 50%;
+            padding: 0;
+            vertical-align: top;
+        }
+        
+        .costs-right-column {
+            width: 50%;
+            padding: 0;
+            vertical-align: top;
+        }
+        
+        .cost-line {
+            display: flex;
+            border-bottom: 1px solid #000;
+            height: 18px;
+            align-items: center;
+        }
+        
+        .cost-line:last-child {
+            border-bottom: none;
+        }
+        
+        .cost-line-label {
+            flex: 1;
+            padding: 2px 4px;
+            border-right: 1px solid #000;
+            font-size: 8px;
+            font-weight: bold;
+        }
+        
+        .cost-line-value {
+            width: 40px;
+            padding: 2px 4px;
+            border-right: 1px solid #000;
+            font-size: 8px;
+            text-align: center;
+        }
+        
+        .cost-line-currency {
+            width: 30px;
+            padding: 2px 4px;
+            font-size: 8px;
+            text-align: center;
+        }
+        
+        .amount-line-label {
+            flex: 1;
+            padding: 2px 4px;
+            border-right: 1px solid #000;
+            font-size: 8px;
+            font-weight: bold;
+        }
+        
+        .amount-line-value {
+            width: 70px;
+            padding: 2px 4px;
+            font-size: 8px;
+            text-align: right;
+        }
+        
+        /* === NOTES === */
+        .notes-area {
+            border: 1px solid #000;
+            min-height: 30px;
+            padding: 4px 6px;
+            margin-bottom: 6px;
+        }
+        
+        .notes-header {
+            font-size: 8px;
+            font-weight: bold;
+        }
+        
+        /* === SIGNATURES === */
+        .signature-layout {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+        }
+        
+        .signature-main-row {
+            height: 60px;
+        }
+        
+        .signature-left-section {
+            border-right: 1px solid #000;
+            width: 50%;
+            padding: 6px 8px;
+            vertical-align: top;
+        }
+        
+        .signature-right-section {
+            width: 50%;
+            padding: 6px 8px;
+            vertical-align: top;
+        }
+        
+        .signature-title {
+            font-size: 8px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+        
+        .technician-name {
+            text-align: center;
+            font-size: 8px;
+            margin-top: 15px;
+        }
+        
+        /* === FOOTER === */
+        .document-footer {
+            display: flex;
+            align-items: center;
+            font-size: 7px;
+            border-top: 1px solid #000;
+            padding-top: 4px;
+            gap: 8px;
+        }
+        
+        .footer-logo-img {
+            max-height: 18px;
+            max-width: 60px;
+        }
+        
+        .footer-company-info {
+            flex: 1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <div class="document-header">
+        <div class="header-column">
+            <div>
+                <img src="http://localhost:3001/assets/pernix_logo.png" alt="Pernix" class="company-logo">
+            </div>
+            <div class="company-details">
+                <strong>Sede amministrativa ed operativa</strong><br>
+                Via G.Pascoli, 42/M1 30020<br>
+                Quarto D'Altino (VE) ITALY<br>
+                T. +39 0422 780605<br>
+                F. +39 0422 828811<br>
+                P.I. E C.F. 03245210277
+            </div>
+        </div>
+        
+        <div class="header-column header-center">
+            <div class="main-title">RAPPORTO<br>INTERVENTO</div>
+        </div>
+        
+        <div class="header-column">
+            <div>
+                <img src="http://localhost:3001/assets/axter_logo.png" alt="Axter" class="company-logo">
+            </div>
+            <div class="company-details">
+                <strong>Sede operativa</strong><br>
+                Via Isonzo 8/B<br>
+                22078 Turate (CO) ITALY<br>
+                +39 02 495042<br>
+                F. +39 02 49504207<br>
+                P.I. E C.F. 04330640964
+            </div>
+        </div>
+    </div>
+
+    <!-- FORM DATA GRID -->
+    <table class="form-grid">
+        <!-- Data and Technician -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label" style="width: 50px;">DATA:</td>
+            <td class="grid-cell" style="width: 80px;">{{date}}</td>
+            <td class="grid-cell" style="width: auto;"></td>
+            <td class="grid-cell cell-label" style="width: 70px;">TECNICO:</td>
+            <td class="grid-cell" style="width: 120px;">{{technician}}</td>
+        </tr>
+        
+        <!-- Intervention Number and Performed By -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label" style="width: 90px;">INTERVENTO N:</td>
+            <td class="grid-cell" style="width: 110px;">{{interventionNumber}}</td>
+            <td class="grid-cell cell-label" style="width: 90px;">EFFETTUATO DA:</td>
+            <td class="grid-cell" style="width: 70px;">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{pernixChecked}}"></span>
+                    <strong>PERNIX</strong>
+                </div>
+            </td>
+            <td class="grid-cell" style="width: 70px;">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{axterChecked}}"></span>
+                    <strong>AXTER</strong>
+                </div>
+            </td>
+        </tr>
+        
+        <!-- Intervention Types -->
+        <tr class="grid-row">
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{repairChecked}}"></span>
+                    <strong>RIPARAZIONE/MANUTENZIONE</strong>
+                </div>
+            </td>
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{installationChecked}}"></span>
+                    <strong>INSTALLAZIONE</strong>
+                </div>
+            </td>
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{courseChecked}}"></span>
+                    <strong>CORSO</strong>
+                </div>
+            </td>
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{demoChecked}}"></span>
+                    <strong>DEMO</strong>
+                </div>
+            </td>
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{otherChecked}}"></span>
+                    <strong>ALTRO</strong>
+                </div>
+            </td>
+        </tr>
+        
+        <!-- Additional Options -->
+        <tr class="grid-row">
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{contractChecked}}"></span>
+                    <strong>CONTRATTO</strong>
+                </div>
+            </td>
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{warrantyChecked}}"></span>
+                    <strong>GARANZIA</strong>
+                </div>
+            </td>
+            <td class="grid-cell">
+                <div class="checkbox-container">
+                    <span class="form-checkbox {{paymentChecked}}"></span>
+                    <strong>PAGAMENTO</strong>
+                </div>
+            </td>
+            <td class="grid-cell"></td>
+            <td class="grid-cell"></td>
+        </tr>
+        
+        <!-- Client Info -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label" style="width: 60px;">CLIENTE:</td>
+            <td class="grid-cell" colspan="2">{{clientName}}</td>
+            <td class="grid-cell cell-label" style="width: 50px;">CITTA':</td>
+            <td class="grid-cell">{{clientCity}}</td>
+        </tr>
+        
+        <!-- Address and Contact -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label">INDIRIZZO:</td>
+            <td class="grid-cell" colspan="2">{{clientAddress}}</td>
+            <td class="grid-cell cell-label">TEL:</td>
+            <td class="grid-cell">{{clientPhone}}</td>
+        </tr>
+        
+        <!-- Additional Contact -->
+        <tr class="grid-row">
+            <td class="grid-cell"></td>
+            <td class="grid-cell"></td>
+            <td class="grid-cell"></td>
+            <td class="grid-cell cell-label">FAX:</td>
+            <td class="grid-cell">{{clientFax}}</td>
+        </tr>
+        
+        <!-- Product Info -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label">PRODOTTO:</td>
+            <td class="grid-cell">{{productBrand}}</td>
+            <td class="grid-cell cell-label">MODELLO:</td>
+            <td class="grid-cell">{{productModel}}</td>
+            <td class="grid-cell"><strong>S/N:</strong> {{productSerial}}</td>
+        </tr>
+        
+        <!-- Problem Reported -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label">DIFETTO SEGNALATO:</td>
+            <td class="grid-cell" colspan="4">{{problemReported}}</td>
+        </tr>
+        
+        <!-- Problem Found -->
+        <tr class="grid-row">
+            <td class="grid-cell cell-label">DIFETTO RISCONTRATO:</td>
+            <td class="grid-cell" colspan="4">{{problemFound}}</td>
+        </tr>
+    </table>
+
+    <!-- WORK DESCRIPTION -->
+    <table class="work-description-section">
+        <tr class="work-description-row">
+            <td class="work-label-cell">DESCRIZIONE INTERVENTO<br>ESEGUITO:</td>
+            <td class="work-content-cell">{{workDescription}}</td>
+            <td class="copies-cell">COPIE STAMPATE:<br><br>{{copiesPrinted}}</td>
+        </tr>
+    </table>
+
+    <!-- PARTS INVENTORY TABLE -->
+    <table class="parts-inventory">
+        <thead>
+            <tr>
+                <th class="parts-header" style="width: 70px;">CODICE</th>
+                <th class="parts-header" style="width: 190px;">DESCRIZIONE PARTI SOSTITUITE</th>
+                <th class="parts-header" style="width: 40px;">Q.TÀ</th>
+                <th class="parts-header" style="width: 70px;">PREZZO €</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{partsRows}}
+        </tbody>
+    </table>
+
+    <!-- COSTS AND TOTALS -->
+    <table class="costs-layout">
+        <tr class="costs-main-row">
+            <td class="costs-left-column">
+                <div class="cost-line">
+                    <div class="cost-line-label">ORE VIAGGIO</div>
+                    <div class="cost-line-value">{{hoursTravel}}</div>
+                    <div class="cost-line-currency">€ --</div>
+                </div>
+                <div class="cost-line">
+                    <div class="cost-line-label">ORE INTERVENTO</div>
+                    <div class="cost-line-value">{{hoursWork}}</div>
+                    <div class="cost-line-currency">€ --</div>
+                </div>
+                <div class="cost-line">
+                    <div class="cost-line-label">ORE TOTALI</div>
+                    <div class="cost-line-value">{{hoursTotal}}</div>
+                    <div class="cost-line-currency">€ --</div>
+                </div>
+                <div class="cost-line">
+                    <div class="cost-line-label">KM TOTALI</div>
+                    <div class="cost-line-value">{{kmTotal}}</div>
+                    <div class="cost-line-currency">€ --</div>
+                </div>
+            </td>
+            <td class="costs-right-column">
+                <div class="cost-line">
+                    <div class="amount-line-label">IMPORTO MATERIALE *</div>
+                    <div class="amount-line-value">€ {{materialsCost}}</div>
+                </div>
+                <div class="cost-line">
+                    <div class="amount-line-label">IMPORTO INTERVENTO **</div>
+                    <div class="amount-line-value">€ {{laborCost}}</div>
+                </div>
+                <div class="cost-line">
+                    <div class="amount-line-label">IMPORTO DI CHIAMATA</div>
+                    <div class="amount-line-value">€ {{calloutCost}}</div>
+                </div>
+                <div class="cost-line">
+                    <div class="amount-line-label"><strong>TOTALE</strong></div>
+                    <div class="amount-line-value"><strong>€ {{subtotal}}</strong></div>
+                </div>
+                <div class="cost-line">
+                    <div class="amount-line-label"><strong>TOTALE (IVA 22%)</strong></div>
+                    <div class="amount-line-value"><strong>€ {{totalWithVat}}</strong></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- NOTES -->
+    <div class="notes-area">
+        <div class="notes-header">NOTE:</div>
+        <div style="margin-top: 3px;">{{notes}}</div>
+    </div>
+
+    <!-- SIGNATURES -->
+    <table class="signature-layout">
+        <tr class="signature-main-row">
+            <td class="signature-left-section">
+                <div class="signature-title">NOME-FIRMA TECNICO:</div>
+                <div class="technician-name">{{technician}}</div>
+            </td>
+            <td class="signature-right-section">
+                <div class="signature-title">TIMBRO E FIRMA CLIENTE:</div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- FOOTER -->
+    <div class="document-footer">
+        <img src="http://localhost:3001/assets/xholding_logo.png" alt="Xholding" class="footer-logo-img">
+        <div class="footer-company-info">
+            Via G. Pascoli, 42/M1 30020 Quarto D'Altino (VE) ITALY T. +39 0422 780605 F. +39 0422 828811
+        </div>
+    </div>
+</body>
+</html>
